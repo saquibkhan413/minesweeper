@@ -1,0 +1,131 @@
+.menu_margin {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.menu_title {
+    font-family: helvetica;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+
+.menu_dropdown {
+    position: absolute;
+    visibility: hidden;
+    width: 150px;
+    top: 20px;   
+    z-index: 5;
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+    cursor: default;
+}
+
+a:link,
+a:visited,
+a:active {
+    color: #000;
+}
+
+a:hover {
+    color: #00C;
+    text-decoration: underline;
+}
+
+.menu_item {
+    font-family: helvetica;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.menu_divider {
+    font-family: helvetica;
+    font-size: 2px;
+}
+
+.focus_box {
+    width: 40px;
+    position: absolute;
+    z-index: 2;
+    top: -4000px;
+    left: 0;
+}
+
+.pause {
+    text-align: center;
+    visibility: hidden;
+    color: #fff;
+    background-color: #000;
+    border-style: solid;
+    position: absolute;
+    z-index: 2;
+}
+
+.disarm {
+    opacity: 0.9;
+    text-align: center;
+    visibility: hidden;
+    background-color: #DDAA77;
+    border-style: solid;
+    position: absolute;
+    z-index: 2;
+}
+
+.disarmCountdown {
+    font-family: Courier;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.disarm input {
+    font-size: 80%;
+}
+
+td {
+    vertical-align: top;
+}
+
+body {
+    font-family: Verdana;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    background-color: #C0C0C0;
+}
+
+.closeb {
+    font-size: 12px;
+}
+
+div {
+    display: inline-block;
+}
+
+#content {
+    width: 728px;
+    text-align: left;
+}
+
+.ddmenu {
+    background-color: #C0C0C0;
+    border: 1px outset grey;
+}
+
+.ddmenu td {
+    border: thin inset grey;
+}
+
+.perbst td {
+    padding: 4px;
+}
+
+.perbst .num {
+    text-align: right;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="js/head.js"></script>
+    <meta name="description" content="Play Minesweeper online for free! Challenge your logic, uncover safe squares, and avoid the hidden mines. Classic puzzle fun on any device.">
+    <title>Minesweeper – Test Your Logic and Strategy Skills</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onclick="clickInBrowser()">
+    <div class="focus_box">
+        <form name="checkForm"><input type="checkbox" onclick="cellTouch()" name="modeCheck"></form>
+    </div>
+    <br>
+    <script>
+        document.write('<div id="container" style="width:' + gwidth() + 'px;height:' + gheight() + 'px;"><div id="gamediv" style="transform-origin:center top;transform:scale(' + zoomPower() + ');">');
+    </script>
+    <div id="divMenuGame" class="menu_dropdown" style="left:3.5%;">
+        <table class="ddmenu">
+            <tr>
+                <td class="menu_item" >
+                    <script>insnc("imNew");</script>&nbsp;<a onclick="return menuItemClick('New')">New Game &nbsp;
+                        &nbsp; &nbsp; &nbsp;F2</a>&nbsp;<br>
+                    <script>insnc("imPause");</script>&nbsp;<a onclick="menuItemClick('Pause')">Pause &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; P</a>&nbsp;<br>
+                    <hr>
+                    <script>insnc("imBeginner");</script>&nbsp;<a
+                        onclick="menuItemClick('Beginner')">Beginner</a>&nbsp;<br>
+                    <script>insnc("imIntermediate");</script>&nbsp;<a
+                        onclick="menuItemClick('Intermediate')">Intermediate</a>&nbsp;<br>
+                    <script>insnc("imExpert");</script>&nbsp;<a onclick="menuItemClick('Expert')">Expert</a>&nbsp;<br>
+                    <script>insnc("imCustom");</script>&nbsp;<a onclick="menuItemClick('Custom')">Custom</a>&nbsp;<br>
+                    <hr>
+                    <script>insnc("");</script>&nbsp;<a onclick="return menuItemClick('Personal')">Personal
+                        Best</a>
+                    <script>insnc("")</script>
+                    <script>insnc("")</script>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divMenuOpt" class="menu_dropdown" style="left:50%;">
+        <table class="ddmenu">
+            <tr>
+                <td class="menu_item">
+                    <script>insnc();</script>
+                    <script>insnc();</script>
+                    <br>
+                    <a onclick="return menuItemClick('First')"
+                        title="The first move will always open a useful series of squares.">
+                        <script>insnc("imFirst");</script>&nbsp;Safe&nbsp;Start
+                    </a><br>
+                    <a onclick="return menuItemClick('Marks')"
+                        title="Second right-click changes a flag to a question mark.">
+                        <script>insnc("imMarks");</script>&nbsp;Question&nbsp;Marks (?)
+                    </a><br>
+                    <a onclick="return menuItemClick('Area')"
+                        title="Clicking on a numbered/satisfied square will open all of its neighbors.">
+                        <script>insnc("imUseMacro");</script>&nbsp;Safe Neighborhood&nbsp;
+                    </a><br>
+                    <a onclick="return menuItemClick('Remaining')"
+                        title="When 0 bombs are left unmarked, click the bomb counter 000 to open all remainders.">
+                        <script>insnc("imRemaining");</script>&nbsp;Open&nbsp;Remaining
+                    </a>&nbsp;<br>
+                    <a onclick="return menuItemClick('Disarm')"
+                        title="Provides the option to undo the last move. Will not count as a high score game.">
+                        <script>insnc("imDisarm");</script>&nbsp;Disarm&nbsp;(undo)
+                    </a>&nbsp;<br>
+                    <a onclick="return menuItemClick('Hints')"
+                        title="Show a hint when pointing at a cell and pressing the letter H.">
+                        <script>insnc("imHints");</script>&nbsp;Hints&nbsp;(press H)
+                    </a>&nbsp;<br>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divDisarm" class="disarm">
+        <p>Mine detonates in<br>
+            <span class="disarmCountdown" id="detonateCountdown">3.0</span><br>
+            <input type="button" onclick="disarmMine();" value="Disarm the Mine"><br>
+            <input type="button" onclick="acceptFate();" value="Accept Your Fate">
+        </p>
+    </div>
+    <div id="divPause" class="pause">
+        <p>PAUSED</p>
+        <p><input type="button" onclick="doUnpause();" value="Resume"></p>
+    </div>
+    <div id="mainmenu" class="menu_margin">
+        <a class="menu_title" onclick="return menuClick('divMenuGame')"
+            onmouseover="return menuMouseOver('divMenuGame')">Game</a>
+        <a class="menu_title" onclick="return menuClick('divMenuOpt')"
+            onmouseover="return menuMouseOver('divMenuOpt')">Options</a>
+    </div>
+    <div id="divBoard" style="font-size:0px;" oncontextmenu="return false;" dir="ltr">
+        <script src="js/doc.js"></script>
+    </div>
+    <br>
+    <br>
+    <div id="content">
+        <div id="window1"></div>
+        <div id="window2"></div>
+        <div id="window3"></div>
+        <div id="window4"></div>
+        <div id="window5"></div>
+        <div id="window6"></div>
+        <div id="window7"></div>
+        <div id="window8">
+            <h2>Custom Settings</h2>
+            <table>
+                <tr>
+                    <td>Game Height:</td>
+                    <td><input type="text" size="3" name="maxY" value="" id="maxY"></td>
+                </tr>
+                <tr>
+                    <td>Game Width:</td>
+                    <td><input type="text" size="3" name="maxX" value="" id="maxX"></td>
+                </tr>
+                <tr>
+                    <td>Number of Bombs:</td>
+                    <td><input type="text" size="3" name="maxNumBombs" value="" id="maxNumBombs"></td>
+                </tr>
+            </table>
+            <p>
+                <input type="button" name="OKButton" value="OK" onclick="launchGame()">
+                <input type="button" name="CancelButton" value="Cancel" onclick="hideallwindows();">
+            </p>
+        </div>
+        <div id="window9">
+            <h2>YOU WIN!</h2>
+            <h3>Congratulations!</h3>
+            <p>Game Time: <span id="gameTime"></span><br><br>
+                <span id="gameFormat2"></span><br><br>
+                Number of clicks: <span id="numMoves"></span>
+            </p>
+            <h3 id="nr">&nbsp;</h3>
+            <input type="button" name="CancelButton" value="Close" onclick="hideallwindows();">
+        </div>
+    </div>
+    <br>
+    <br>
+    <script>
+        function hideallwindows() {
+            for (var i = 1; i < 10; i++) document.getElementById("window" + i).style.display = "none";
+        }
+        hideallwindows();
+        var dim1 = document.getElementById("container").getBoundingClientRect();
+        var dim2 = document.getElementById("content").getBoundingClientRect();
+        var rt = document.body.scrollWidth - Math.min(dim1.left, dim2.left) + 10;
+        var tp = dim1.top;
+        document.write('<div id="leftpane" style="position:absolute;right:' + rt + 'px;top:' + tp + 'px;text-align:right;">');
+    </script>
+    <script>
+        document.write('</div>');
+        var lt = Math.max(dim1.right, dim2.right) + 10;
+        document.write('<div id="rightpane" style="position:absolute;left:' + lt + 'px;top:' + tp + 'px;text-align:left;">');
+    </script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
